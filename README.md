@@ -33,7 +33,7 @@ Method-Override - https://www.npmjs.com/package/method-override
 
 1. Home Page
 
-![Home Page] (public/assets/images/homepage.png)
+![Home Page] (../public/assets/images/homepage.png)
 
 2. Survey Page
 
