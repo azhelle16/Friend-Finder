@@ -23,26 +23,26 @@ Method-Override - https://www.npmjs.com/package/method-override
 
 	a. By Terminal
 	
-	![Download Via Terminal] (images/dlTerminal.png)
+	<img src="images/dlTerminal.png" alt="Download via Terminal">
 	
 	b. Through GitHub
 	
-	![Download Via GitHUb] (images/dlTerminal.png)
+	<img src="images/dlTerminal.png" alt="Download via Terminal">
 
 ## Screenshots
 
 1. Home Page
 
-![Home Page] (images/homepage.png)
+<img src="images/homepage.png" alt="Home Page">
 
 2. Survey Page
 
-![Survey Page] (images/survey.png)
+<img src="images/survey.png" alt="Survey Page">
 
 3. Friends List - JSON View
 
-![JSON View] (images/jsonView.png)
+<img src="images/jsonView.png" alt="JSON View">
 
 4. Friends List - HTML View
 
-![HTML View] (images/htmlView.png)
+<img src="images/htmlView.png" alt="HTML View">
