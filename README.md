@@ -37,12 +37,12 @@ Method-Override - https://www.npmjs.com/package/method-override
 
 2. Survey Page
 
-![Home Page] (public/assets/images/survey.png)
+![Survey Page] (public/assets/images/survey.png)
 
 3. Friends List - JSON View
 
-![Home Page] (public/assets/images/jsonView.png)
+![JSON View] (public/assets/images/jsonView.png)
 
 4. Friends List - HTML View
 
-![Home Page] (public/assets/images/htmlView.png)
+![HTML View] (public/assets/images/htmlView.png)
