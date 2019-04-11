@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friend Finder: An Express and MySQL Application</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="./assets/fontawesome-free-5.7.1-web/css/all.css">
+	<link rel="stylesheet" href="./assets/fontawesome-free-5.7.1-web/css/all.min.css">	
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./assets/javascript/app.js"></script>
+</head>
+<body>
+	<div id="survey-container" class="border border-dark rounded rounded-lg sub-container container">
+		<div class="row mx-auto my-2 align-items-center h-100 no-gutters">
+			<div class="col-10 col-sm-6">
+				<div class="pt-3 text-justify">
+					<a href="/index.html"><i class="fas fa-user-friends fa-3x mr-2 align-middle"></i></a>
+					<a href="/index.html"><img src="./assets/images/title.png" class="img-responsive" height=50px></a>
+				</div>
+			</div>
+			<div class="col-2 col-sm-6">
+				<div class="text-right pt-3">
+					<a class="flist"><i class="fa-2x fas fa-list-alt align-middle"></i></a>
+					<a class="flist" href=""><i>Friends List</i></a>
+					<div class="submenus dispHide">
+						<span><a href="/api/friends" target="_blank">JSON View</a></span>
+						<span>HTML View</span>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<hr>
+		<div id="user-form" class="text-justify mx-auto">
+			<h4>Tell Us About Yourself!</h4>
+			<form>
+				<div class="form-group">
+				    <label for="name-input"><span class="allRed">*</span>Name</label>
+				    <input type="text" name="name_input" class="form-control" id="name-input" placeholder="Enter Your Name">
+				</div>
+				<div class="form-group">
+				    <label for="photo-input"><span class="allRed">*</span>Photo</label>
+				    <input type="text" name="photo_input" class="form-control" id="photo-input" placeholder="Enter Link For Photo">
+				</div>
+			</form>
+		</div>
+		<hr>
+		<div id="question-div" class="overflow-auto mx-auto pb-3"></div>
+	</div>
+	<div class="modal" tabindex="-1" role="dialog" id="alertModal">
+  		<div class="modal-dialog" role="document">
+  			<div class="modal-content">
+   		  		<div class="modal-header">
+        			<!-- <h5 class="modal-title">HOW TO PLAY</h5> -->
+      			</div>
+     			<div class="modal-body">
+      			</div>
+      			<div class="modal-footer">
+        			<button id="modalAlertBtn" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	<div class="modal" tabindex="-1" role="dialog" id="friendModal">
+  		<div class="modal-dialog" role="document">
+  			<div class="modal-content">
+   		  		<div class="modal-header">
+        			<h5 class="modal-title">THE LIST</h5>
+      			</div>
+     			<div class="modal-body text-break">
+      			</div>
+      			<div class="modal-footer">
+        			<button id="modalFriendBtn" type="button" class="btn" data-dismiss="modal">CLOSE</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	<script type="text/javascript">
+		getQuestions();
+	</script>
+</body>
+</html>
