@@ -323,37 +323,50 @@ function createImages(results, modal) {
 
 	$("#"+modal+" .modal-body").empty()
 
-	for (var b = 0; b < results.length; b++) {
-		var main_div = $("<div>")
-		main_div.attr("class","media mb-3")
-		var div1 = $("<div>")
-		div1.attr("class","media-left align-self-center")
-		var img = $("<img>")
-		if (results[b].scores == undefined) {
-			img.attr("class","matchsize media-object")
-		} else {
-			img.attr("class","imgsize media-object")
-		}
-		img.attr("src",results[b].picture_link)
-		div1.append(img)
-		var div2 = $("<div>")
-		div2.attr("class","media-body ml-4")
-		var hr = $("<h4>")
-		hr.attr("class","media-heading text-justify")
-		hr.text(results[b].name)
-		var br = $("<br>")
-		div2.append(hr)
-		div2.append(br)
-		if (results[b].scores != undefined) {
-			var p = $("<p>")
-			p.text("Scores: "+results[b].scores.join(", "))
-			div2.append(p)
-		}
-		main_div.append(div1)
-		main_div.append(div2)
-		$("#"+modal+" .modal-body").append(main_div)
-	}
+	if (results.length == 0) {
 
+		var msg = ""
+		switch (modal.toLowerCase()) {
+			case "friendmodal": msg = "No data on the database.\n"; break;
+			case "matchmodal": msg = "No match found.\n"; break;
+		}
+
+		$("#"+modal+" .modal-body").append(msg)
+
+	} else {
+
+		for (var b = 0; b < results.length; b++) {
+			var main_div = $("<div>")
+			main_div.attr("class","media mb-3")
+			var div1 = $("<div>")
+			div1.attr("class","media-left align-self-center")
+			var img = $("<img>")
+			if (results[b].scores == undefined) {
+				img.attr("class","matchsize media-object")
+			} else {
+				img.attr("class","imgsize media-object")
+			}
+			img.attr("src",results[b].picture_link)
+			div1.append(img)
+			var div2 = $("<div>")
+			div2.attr("class","media-body ml-4")
+			var hr = $("<h4>")
+			hr.attr("class","media-heading text-justify")
+			hr.text(results[b].name)
+			var br = $("<br>")
+			div2.append(hr)
+			div2.append(br)
+			if (results[b].scores != undefined) {
+				var p = $("<p>")
+				p.text("Scores: "+results[b].scores.join(", "))
+				div2.append(p)
+			}
+			main_div.append(div1)
+			main_div.append(div2)
+			$("#"+modal+" .modal-body").append(main_div)
+		}
+	
+	}
 	//console.log(modal)
 
 	$("#"+modal).modal("show")

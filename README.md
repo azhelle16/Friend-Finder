@@ -5,29 +5,73 @@ The objective of this application is to find the best match for the user by answ
 
 ## Packages
 
-Require - https://www.npmjs.com/package/require
+Require - _https://www.npmjs.com/package/require_
 
-MySQL - https://www.npmjs.com/package/mysql
+MySQL - _https://www.npmjs.com/package/mysql_
 
-Express - https://www.npmjs.com/package/express
+Express - _https://www.npmjs.com/package/express_
 
-Body-Parser - https://www.npmjs.com/package/body-parser
+Body-Parser - _https://www.npmjs.com/package/body-parser_
 
-Path - https://www.npmjs.com/package/path
+Path - _https://www.npmjs.com/package/path_
 
-Method-Override - https://www.npmjs.com/package/method-override
+Method-Override - _https://www.npmjs.com/package/method-override_
+
+DotEnv - _https://www.npmjs.com/package/dotenv_
+
+## System Requirements
+
+1. NodeJS - version 10 and up
+
+2. MySQL - version 8.0 
 
 ## Setting Up Your App
 
 1. Download The Code 
 
-	a. By Terminal
-	
-	![Downloading Via Terminal](images/dlTerminal.png)
-	
-	<!--b. Through GitHub
-	
-	<img src="images/dlTerminal.png" alt="Download via Terminal">-->
+![Downloading Via Terminal](images/dlTerminal.png)
+
+2. Install The Packages Listed 
+
+	- Using the _package.json_ file, run _"npm install"_ inside the Friend-Finder folder (see Figure 1)
+		- if _"npm audit fix"_ shows up, just run the command after the installation 	
+	- The packages listed above should be inside _"node\_modules"_ folder to make the app work. Otherwise, you have to manually download the package (Use the link to see instruction) (see Figure 2)
+
+![Installing Packages](images/packages.png)
+<p align="center" style="color:gray;font-size:12px;"><i>Figure 1: Package Installation</i></p>
+
+![Node Modules Folder](images/modules.png)
+<p align="center" style="color:gray;font-size:12px"><i>Figure 2: Inside the node_modules folder. The yellow-lined modules are expected to be inside the folder for the app to work.</i></p>
+
+3. Building Your Database
+
+	- The download includes two SQL files which can be found inside the **_db_** folder. Go inside the **_db_** folder then login to your MySQL via Terminal using your username and password. (See Figure 3)
+	- Once logged in, run **_schema.sql_**. (See Figures 4)
+
+![Logging Inside MySQL](images/sqlLogin.png)
+<p align="center" style="color:gray;font-size:12px;"><i>Figure 3: Successful login inside the MySQL.</i></p>
+
+![Creating The Database](images/schema.png)
+<p align="center" style="color:gray;font-size:12px;"><i>Figure 4: Running schema.sql.</i></p>
+
+4. Create Your _.env_ File
+
+	- Going back one directory up, create a file and save it as **_.env_**. Inside the file, provide your database credentials. (See Figure 5)
+
+![Inside Env](images/envFile.png)
+<p align="center" style="color:gray;font-size:12px;"><i>Figure 5: Information inside the .env file.</i></p>
+
+5. Running The App
+
+	- You can also use _"node server.js"_ to run the application. Otherwise, install the _"nodemon"_ package (https://www.npmjs.com/package/nodemon)
+
+![Running The File](images/nodemon.png)
+
+![The Application](images/ff1.png)
+
+![The Application](images/ff2.png)
+
+**_Voila!_**/ You know have Friend Finder running in your browser :smile:
 
 ## Screenshots
 
