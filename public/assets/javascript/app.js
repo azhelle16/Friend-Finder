@@ -34,6 +34,10 @@ $(document).ready(function() {
         $(".submenus").slideDown("fast")
     })
 
+    $(".flist").on("click", function (e) {
+        e.preventDefault()
+    })
+
     $(".submenus").on("mouseleave", function () {
         $(this).slideUp('fast');
     })
@@ -55,8 +59,7 @@ $(document).ready(function() {
 			$("#friendModal .modal-body").empty().append(br)
 			$("#friendModal .modal-body").append(img)
 			$("#friendModal .modal-body").append(br2)
-			$("#friendModal").modal("show")
-			createImages(results)
+			createImages(results,"friendModal")
 		});
  
     })
@@ -64,7 +67,9 @@ $(document).ready(function() {
 
 })
 
-$(document).on("click", "button", function() {
+$(document).on("click", "button", function(e) {
+
+	e.preventDefault()
 
 	switch ($(this).attr("id").toLowerCase()) {
 		case "submitbtn":
@@ -249,7 +254,7 @@ function insertInfo() {
 			alertMsg(message.error)
 			return
 		} else {
-			insertAnswers(message.id)
+			insertAnswers(message.id,findBestMatch)
 		  }
 	});
 
@@ -261,16 +266,16 @@ function insertInfo() {
  #  FUNCTION NAME : insertAnswers
  #  AUTHOR        : Maricel Louise Sumulong
  #  DATE          : April 10, 2019 PDT
- #  MODIFIED BY   : 
- #  REVISION DATE : 
- #  REVISION #    : 
+ #  MODIFIED BY   : Maricel Louise Sumulong
+ #  REVISION DATE : April 20, 2019 PDT
+ #  REVISION #    : 1
  #  DESCRIPTION   : submits query to insert the user's answers to db
- #  PARAMETERS    : user id
+ #  PARAMETERS    : user id, callback
  #
  #######################################################################
 */
 
-function insertAnswers(id) {
+function insertAnswers(id,callback) {
 
 	for (var a = 0; a < qidArr.length; a++) {
 
@@ -280,17 +285,20 @@ function insertAnswers(id) {
 		$.ajax({
 			url: '/ff-question-insert/' + id,
 			method: 'POST',
-			data: {question_id : qid, score : score}
-		}).then(function(message){
+			data: {question_id : qid, score : score},
+			async: false
+		}).done(function(message){
 			if ('error' in message) {
 				alertMsg(message.error)
 				return
 			} 
+			//console.log("answers insert")
 		});
 
 	}
 
 	//findBestMatch(id)
+	callback(id)
 	clearFormAndOtherData()
 }
 
@@ -300,18 +308,20 @@ function insertAnswers(id) {
  #  FUNCTION NAME : createImages
  #  AUTHOR        : Maricel Louise Sumulong
  #  DATE          : April 10, 2019 PDT
- #  MODIFIED BY   : 
- #  REVISION DATE : 
- #  REVISION #    : 
+ #  MODIFIED BY   : Maricel Louise Sumulong
+ #  REVISION DATE : April 22, 2019 PDT
+ #  REVISION #    : 1
  #  DESCRIPTION   : creates a human readable form of the friends list
- #  PARAMETERS    : json data
+ #  PARAMETERS    : json data, modal name
  #
  #######################################################################
 */
 
-function createImages(results) {
+function createImages(results, modal) {
 
-	$("#friendModal .modal-body").empty()
+	//console.log(results)
+
+	$("#"+modal+" .modal-body").empty()
 
 	for (var b = 0; b < results.length; b++) {
 		var main_div = $("<div>")
@@ -319,7 +329,11 @@ function createImages(results) {
 		var div1 = $("<div>")
 		div1.attr("class","media-left align-self-center")
 		var img = $("<img>")
-		img.attr("class","imgsize media-object")
+		if (results[b].scores == undefined) {
+			img.attr("class","matchsize media-object")
+		} else {
+			img.attr("class","imgsize media-object")
+		}
 		img.attr("src",results[b].picture_link)
 		div1.append(img)
 		var div2 = $("<div>")
@@ -328,15 +342,21 @@ function createImages(results) {
 		hr.attr("class","media-heading text-justify")
 		hr.text(results[b].name)
 		var br = $("<br>")
-		var p = $("<p>")
-		p.text("Scores: "+results[b].scores.join(", "))
 		div2.append(hr)
 		div2.append(br)
-		div2.append(p)
+		if (results[b].scores != undefined) {
+			var p = $("<p>")
+			p.text("Scores: "+results[b].scores.join(", "))
+			div2.append(p)
+		}
 		main_div.append(div1)
 		main_div.append(div2)
-		$("#friendModal .modal-body").append(main_div)
+		$("#"+modal+" .modal-body").append(main_div)
 	}
+
+	//console.log(modal)
+
+	$("#"+modal).modal("show")
 
  }
 
@@ -361,5 +381,39 @@ function clearFormAndOtherData() {
 	$("#name-input").val("")
 	$("#photo-input").val("")
 	getQuestions()
+
+}
+
+ /*
+ #######################################################################
+ #
+ #  FUNCTION NAME : findBestMatch
+ #  AUTHOR        : Maricel Louise Sumulong
+ #  DATE          : April 20, 2019 PDT
+ #  MODIFIED BY   : 
+ #  REVISION DATE : 
+ #  REVISION #    : 
+ #  DESCRIPTION   : resets the data and questionnaires
+ #  PARAMETERS    : user id
+ #
+ #######################################################################
+*/	
+
+function findBestMatch(id) {
+
+	$.ajax({
+		url: '/match',
+		method: 'POST',
+		data: {id : id}
+	}).then(function(message){
+		if ('error' in message) {
+			alertMsg(message.error)
+			return
+		} else if ('message' in message) {
+			alertMsg(message.message) //No match or no entry
+		} else {
+			createImages(message, "matchModal")
+		  }
+	});
 
 }

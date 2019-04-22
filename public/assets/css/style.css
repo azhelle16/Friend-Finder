@@ -109,6 +109,11 @@ select {
 	height: 100px;
 }
 
+.matchsize {
+	width: 300px;
+	height: 200px;
+}
+
 p {
 	line-height: 25px;
 	text-align: justify;
@@ -118,7 +123,8 @@ p {
 
 /* DIALOG */
 
-.modal-header, #modalFriendBtn {
+.modal-header, #modalFriendBtn,
+#modalMatchBtn {
 	background-color: #A96B62;
 	color: white;
 }
@@ -128,7 +134,7 @@ p {
 	width: 100%;
 }
 
-#alertModal, #friendModal {
+#alertModal, #friendModal, #matchModal {
 	position: absolute;
 	transform: translate(-50%, -50%);
 	left: 50%;
@@ -140,13 +146,14 @@ p {
 	max-height: 200px;
 }
 */
-#friendModal {
+#friendModal, #matchModal {
 	height: 100%;
 	max-width: 500px;
 	overflow: none;
 }
 
-#friendModal .modal-body {
+#friendModal .modal-body, 
+#matchModal .modal-body {
 	max-height: 500px;
 	display: block;
 	overflow: auto;

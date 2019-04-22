@@ -1,3 +1,4 @@
+require("dotenv").config();
 var express = require("express")
 var mysql = require("mysql")
 var path = require("path")
@@ -5,12 +6,20 @@ var app = express()
 var bodyParser = require('body-parser')
 var met = require("method-override")
 
-con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "friend_finder"
-});
+var mysql = require('mysql');
+var con
+
+if (process.env.JAWSDB_URL) {
+  con = mysql.createConnection(process.env.JAWSDB_URL)
+
+} else {
+  con = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
+  });
+}
  
 con.connect(); 
 
@@ -69,6 +78,30 @@ app.get("/api/friends", function(req, res) {
 
 });
 
-app.listen(3000, function(){
-	console.log('listening on 3000');
+app.post('/match', function(req, res){
+	//console.log(`SELECT friends.name, friends.picture_link, matched.otherId FROM friends LEFT JOIN (SELECT them otherId, SUM(diff)-COUNT(*) score FROM (SELECT  their.friend_id them, ABS(their.score-my.score) diff FROM scores their LEFT JOIN scores my ON their.question_id=my.question_id WHERE their.friend_id!=my.friend_id AND my.friend_id=${req.body.id}) t1 GROUP BY them ORDER BY score )matched ON friends.id = matched.otherId WHERE friends.id = matched.otherId`)
+	con.query(`SELECT f.name, f.picture_link, them otherId, SUM(diff)-COUNT(*) score 
+				FROM (
+					SELECT  their.friend_id them, ABS(their.score-my.score) diff 
+					FROM scores their 
+					LEFT JOIN scores my ON their.question_id=my.question_id 
+					WHERE their.friend_id!=my.friend_id AND my.friend_id=?) t1
+				LEFT JOIN friends f ON them = f.id GROUP BY them ORDER BY score
+				LIMIT 1`, 
+			  [req.body.id],function (error, results, fields) {
+			  	//console.log(results)
+	  if (error) res.json({error : error})
+	  else {
+	  	if (results.length == 0) {
+	  		res.json({message:"No friends available to match yet. You're the first one to take the survey! :)"})
+	  	} else { 
+	  		res.json(results)
+	  	  }
+	  }
+	});
+});
+
+app.listen(process.env.PORT || 3001, function() {
+  var port = process.env.PORT || 3001
+  console.log('listening on '+port);
 });

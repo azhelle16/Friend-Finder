@@ -46,3 +46,7 @@ Method-Override - https://www.npmjs.com/package/method-override
 4. Friends List - HTML View
 
 <img src="images/htmlView.png" alt="HTML View">
+
+## Credits
+
+Questions Used - _https://www.psychometricinstitute.com.au/Free-Personality-Test.asp_
