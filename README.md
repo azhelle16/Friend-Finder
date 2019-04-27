@@ -57,6 +57,7 @@ DotEnv - _https://www.npmjs.com/package/dotenv_
 4. Create Your _.env_ File
 
 	- Going back one directory up, create a file and save it as **_.env_**. Inside the file, provide your database credentials. (See Figure 5)
+	- The username and password of **_your_** database should be supplied in the file.
 
 ![Inside Env](images/envFile.png)
 <p align="center" style="color:gray;font-size:12px;"><i>Figure 5: Information inside the .env file.</i></p>
