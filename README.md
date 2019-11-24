@@ -72,7 +72,7 @@ DotEnv - _https://www.npmjs.com/package/dotenv_
 
 ![The Application](images/ff2.png)
 
-**_Voila!_**/ You know have Friend Finder running in your browser :smile:
+**_Voila!_** You know have Friend Finder running in your browser :smile:
 
 ## Screenshots
 
